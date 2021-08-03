@@ -4,6 +4,7 @@ import EmailInput from '../components/LoginScreen/EmailInput';
 import ButtonPlay from '../components/LoginScreen/ButtonPlay';
 import logo from '../trivia.png';
 import '../App.css';
+import ButtonSettings from '../components/LoginScreen/ButtonSettings';
 
 class LoginScreen extends Component {
   constructor(props) {
@@ -56,6 +57,7 @@ class LoginScreen extends Component {
           <ButtonPlay
             isDisabled={ disabled }
           />
+          <ButtonSettings />
         </header>
       </div>
     );
