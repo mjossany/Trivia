@@ -4,9 +4,10 @@ import { Link } from 'react-router-dom';
 import fetchToken from '../../fetchs/fetchToken';
 
 class ButtonPlay extends Component {
-  getToken() {
-    const token = fetchToken();
-    console.log(token);
+  async getToken() {
+    const token = await fetchToken();
+    const tokenStringfy = JSON.stringify(token);
+    localStorage.setItem('token', tokenStringfy);
   }
 
   render() {
