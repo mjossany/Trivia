@@ -1,24 +1,17 @@
 import React, { Component } from 'react';
-import { bool } from 'prop-types';
+import { func, bool } from 'prop-types';
 import { Link } from 'react-router-dom';
-import fetchToken from '../../fetchs/fetchToken';
 
 class ButtonPlay extends Component {
-  async getToken() {
-    const token = await fetchToken();
-    const tokenStringfy = JSON.stringify(token);
-    localStorage.setItem('token', tokenStringfy);
-  }
-
   render() {
-    const { isDisabled } = this.props;
+    const { isDisabled, storeFunc } = this.props;
     return (
       <Link to="/playGame">
         <button
           type="button"
           data-testid="btn-play"
           disabled={ isDisabled }
-          onClick={ this.getToken }
+          onClick={ storeFunc }
         >
           Jogar
         </button>
@@ -29,6 +22,7 @@ class ButtonPlay extends Component {
 
 ButtonPlay.propTypes = {
   isDisabled: bool.isRequired,
+  storeFunc: func.isRequired,
 };
 
 export default ButtonPlay;
