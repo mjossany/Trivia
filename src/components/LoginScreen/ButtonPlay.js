@@ -1,17 +1,27 @@
 import React, { Component } from 'react';
 import { bool } from 'prop-types';
+import { Link } from 'react-router-dom';
+import fetchToken from '../../fetchs/fetchToken';
 
 class ButtonPlay extends Component {
+  getToken() {
+    const token = fetchToken();
+    console.log(token);
+  }
+
   render() {
     const { isDisabled } = this.props;
     return (
-      <button
-        type="button"
-        data-testid="btn-play"
-        disabled={ isDisabled }
-      >
-        Jogar
-      </button>
+      <Link to="/playGame">
+        <button
+          type="button"
+          data-testid="btn-play"
+          disabled={ isDisabled }
+          onClick={ this.getToken }
+        >
+          Jogar
+        </button>
+      </Link>
     );
   }
 }
