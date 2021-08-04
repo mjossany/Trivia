@@ -7,7 +7,7 @@ import ButtonPlay from '../components/LoginScreen/ButtonPlay';
 import logo from '../trivia.png';
 import '../App.css';
 import ButtonSettings from '../components/LoginScreen/ButtonSettings';
-import storagePlayerInfo from '../actions/index';
+import { storagePlayerInfo } from '../actions/index';
 import fetchToken from '../fetchs/fetchToken';
 
 class LoginScreen extends Component {
