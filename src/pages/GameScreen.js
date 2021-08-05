@@ -1,47 +1,61 @@
 import React, { Component } from 'react';
-import { func, string } from 'prop-types';
 import { connect } from 'react-redux';
+import { func, arrayOf, objectOf, bool } from 'prop-types';
 import Header from '../components/Header/Header';
 import fetchQuestions from '../fetchs/fetchQuestions';
 import QuestionCategory from '../components/Question/QuestionCategory';
 import QuestionText from '../components/Question/QuestionText';
+import QuestionAnswers from '../components/Question/QuestionAnswers';
 
 class GameScreen extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      questionNumber: 0,
+    };
+  }
+
   componentDidMount() {
-    const { getQuestions } = this.props;
-    getQuestions();
+    const { dispatchQuestions } = this.props;
+    dispatchQuestions();
   }
 
   render() {
-    const { getCategory, getQuestion } = this.props;
-    console.log(getCategory);
+    const { questionNumber } = this.state;
+    const { getQuestions, getLoading } = this.props;
+    if (getLoading) return <p>Loading...</p>;
     return (
       <div>
         <Header />
         <QuestionCategory
-          category={ getCategory[0] }
+          category={ getQuestions[questionNumber].category }
         />
         <QuestionText
-          question={ getQuestion[0] }
+          question={ getQuestions[questionNumber].question }
+        />
+        <QuestionAnswers
+          type={ getQuestions[questionNumber].type }
+          correctAnswer={ getQuestions[questionNumber].correct_answer }
+          wrongAnswers={ getQuestions[questionNumber].incorrect_answers }
         />
       </div>
     );
   }
 }
 
+const mapDispathToProps = (dispatch) => ({
+  dispatchQuestions: (questions) => (dispatch(fetchQuestions(questions))),
+});
+
+const mapStateToProps = ({ questions }) => ({
+  getQuestions: questions.questions,
+  getLoading: questions.loading,
+});
+
 GameScreen.propTypes = {
-  getQuestions: func.isRequired,
-  getCategory: string.isRequired,
-  getQuestion: string.isRequired,
+  dispatchQuestions: func.isRequired,
+  getQuestions: arrayOf(objectOf).isRequired,
+  getLoading: bool.isRequired,
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  getQuestions: (data) => dispatch(fetchQuestions(data)),
-});
-
-const mapStateToProps = (state) => ({
-  getCategory: state.questions.results,
-  getQuestion: state.questions.results,
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(GameScreen);
+export default connect(mapStateToProps, mapDispathToProps)(GameScreen);

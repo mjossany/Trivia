@@ -8,7 +8,7 @@ class QuestionCategory extends Component {
       <p
         data-testid="question-category"
       >
-        { category !== undefined ? category.category : '' }
+        { category }
       </p>
     );
   }

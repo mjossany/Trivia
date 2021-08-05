@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { func } from 'prop-types';
+import { func, string } from 'prop-types';
 import { connect } from 'react-redux';
 import NameInput from '../components/LoginScreen/NameInput';
 import EmailInput from '../components/LoginScreen/EmailInput';
@@ -23,10 +23,14 @@ class LoginScreen extends Component {
     this.getToken = this.getToken.bind(this);
   }
 
+  componentDidMount() {
+    const { getToken } = this.props;
+    getToken();
+  }
+
   async getToken() {
     const { state } = this;
-    const { storePlayerInfo } = this.props;
-    const token = await fetchToken();
+    const { storePlayerInfo, token } = this.props;
     const tokenStringfy = JSON.stringify(token);
     localStorage.setItem('token', tokenStringfy);
     storePlayerInfo(state);
@@ -80,10 +84,17 @@ class LoginScreen extends Component {
 
 LoginScreen.propTypes = {
   storePlayerInfo: func.isRequired,
+  getToken: func.isRequired,
+  token: string.isRequired,
 };
+
+const mapStateToProps = ({ token }) => ({
+  token: token.token,
+});
 
 const mapDispatchToProps = (dispatch) => ({
   storePlayerInfo: (data) => dispatch(storagePlayerInfo(data)),
+  getToken: () => dispatch(fetchToken()),
 });
 
-export default connect(null, mapDispatchToProps)(LoginScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen);

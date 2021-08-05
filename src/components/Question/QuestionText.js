@@ -8,7 +8,7 @@ class QuestionText extends Component {
       <p
         data-testid="question-text"
       >
-        { question !== undefined ? question.question : '' }
+        { question }
       </p>
     );
   }
