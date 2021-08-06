@@ -25,6 +25,7 @@ class QuestionAnswers extends Component {
                 type="button"
                 key={ answer }
                 data-testid={ correct ? 'correct-answer' : `wrong-answer-${i}` }
+                disabled={ answered }
                 onClick={ answeredTrue }
                 className={ answered ? isCorrect : '' }
               >
