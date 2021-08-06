@@ -1,52 +1,54 @@
 import React, { Component } from 'react';
-import PlayerImg from '../components/Header/PlayerImg';
-import PlayerName from '../components/Header/PlayerName';
+import { arrayOf, objectOf } from 'prop-types';
+import { connect } from 'react-redux';
+import Header from '../components/Header/Header';
+import { Button, Feed, Hits, TotalScore } from '../components/Feedback';
 
 class Feedback extends Component {
   render() {
-    const score = 0; // Pegar valor do stado global ou na localStorage não tenho certeza;
+    const { getQuestions } = this.props;
     const assertions = 4; // Pegar valor do stado global ou na localStorage não tenho certeza;
-    const msgFeedback = ['Podia ser melhor...', 'Mandou bem!'];
-    const minValue = 3;
-    const totalScore = 0;
+    const totalScore = 0; // Pegar valor do stado global ou na localStorage não tenho certeza;
+    const qntQuestions = getQuestions.length;
     return (
       <div>
         <header>
           <h1>Feedback</h1>
-          <PlayerImg />
-          <PlayerName />
-          <span
-            data-testid="header-score"
-          >
-            {`Placar: ${score}`}
-          </span>
+          <Header />
         </header>
         <main>
-          <div>
-            <span
-              data-testid="feedback-text"
-            >
-              { assertions < minValue ? msgFeedback[0] : msgFeedback[1] }
-            </span>
-          </div>
-          <div>
-            <span
-              data-testid="feedback-total-score"
-            >
-              {`Total Score: ${totalScore}`}
-            </span>
-          </div>
-          <div>
-            <span
-              data-testid="feedback-total-question"
-            >
-              {`Acertos: ${assertions}/5`}
-            </span>
-          </div>
+          <Feed
+            assertions={ assertions }
+          />
+          <TotalScore
+            totalScore={ totalScore }
+          />
+          <Hits
+            assertions={ assertions }
+            qntQuestions={ qntQuestions }
+          />
+          <Button
+            link="/"
+            testId="btn-play-again"
+            label="Jogar novamente"
+          />
+          <Button
+            link="/ranking"
+            testId="btn-ranking"
+            label="Ver Ranking"
+          />
         </main>
       </div>
     );
   }
 }
 
-export default Feedback;
+const mapStateToProps = ({ questions }) => ({
+  getQuestions: questions.questions,
+});
+
+Feedback.propTypes = {
+  getQuestions: arrayOf(objectOf).isRequired,
+};
+
+export default connect(mapStateToProps)(Feedback);
