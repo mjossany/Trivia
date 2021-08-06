@@ -5,9 +5,10 @@ import PlayerName from '../components/Header/PlayerName';
 class Feedback extends Component {
   render() {
     const score = 0; // Pegar valor do stado global ou na localStorage não tenho certeza;
-    const assertions = 7; // Pegar valor do stado global ou na localStorage não tenho certeza;
+    const assertions = 4; // Pegar valor do stado global ou na localStorage não tenho certeza;
     const msgFeedback = ['Podia ser melhor...', 'Mandou bem!'];
     const minValue = 3;
+    const totalScore = 0;
     return (
       <div>
         <header>
@@ -21,11 +22,27 @@ class Feedback extends Component {
           </span>
         </header>
         <main>
-          <span
-            data-testid="feedback-text"
-          >
-            { assertions < minValue ? msgFeedback[0] : msgFeedback[1] }
-          </span>
+          <div>
+            <span
+              data-testid="feedback-text"
+            >
+              { assertions < minValue ? msgFeedback[0] : msgFeedback[1] }
+            </span>
+          </div>
+          <div>
+            <span
+              data-testid="feedback-total-score"
+            >
+              {`Total Score: ${totalScore}`}
+            </span>
+          </div>
+          <div>
+            <span
+              data-testid="feedback-total-question"
+            >
+              {`Acertos: ${assertions}/5`}
+            </span>
+          </div>
         </main>
       </div>
     );
