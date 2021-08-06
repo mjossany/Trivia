@@ -7,11 +7,10 @@ class Timer extends Component {
   constructor() {
     super();
     this.state = {
-      timer: 5,
+      timer: 30,
     };
 
     this.countdown = this.countdown.bind(this);
-    this.timeOver = this.timeOver.bind(this);
   }
 
   componentDidMount() {
@@ -26,14 +25,7 @@ class Timer extends Component {
     if (state.timer === 0) {
       clearInterval(this.interval);
       answeredTrue();
-      this.timeOver();
     }
-  }
-
-  timeOver() {
-    this.setState({
-      timer: 5,
-    });
   }
 
   countdown() {
