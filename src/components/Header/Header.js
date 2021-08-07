@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import md5 from 'crypto-js/md5';
 import { connect } from 'react-redux';
 import { string, number } from 'prop-types';
 import PlayerName from './PlayerName';
@@ -15,9 +14,7 @@ class Header extends Component {
       <div>
         <Timer timer={ timer } />
         <PlayerName />
-        <PlayerImg
-          playerImg={ img }
-        />
+        <PlayerImg />
         <Score />
       </div>
     );
