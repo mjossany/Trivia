@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import md5 from 'crypto-js/md5';
-import { connect } from 'react-redux';
 import { number } from 'prop-types';
 import PlayerName from './PlayerName';
 import Score from './Score';
