@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+import md5 from 'crypto-js/md5';
 import { connect } from 'react-redux';
-import { string, number } from 'prop-types';
+import { number } from 'prop-types';
 import PlayerName from './PlayerName';
 import Score from './Score';
 import PlayerImg from './PlayerImg';
@@ -8,8 +9,7 @@ import Timer from './Timer';
 
 class Header extends Component {
   render() {
-    const { Email, timer } = this.props;
-    const img = md5(Email).toString();
+    const { timer } = this.props;
     return (
       <div>
         <Timer timer={ timer } />
@@ -22,12 +22,7 @@ class Header extends Component {
 }
 
 Header.propTypes = {
-  Email: string.isRequired,
   timer: number.isRequired,
 };
 
-const mapStateToProps = ({ player }) => ({
-  Email: player.gravatarEmail,
-});
-
-export default connect(mapStateToProps)(Header);
+export default Header;
