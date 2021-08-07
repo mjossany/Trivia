@@ -1,0 +1,24 @@
+import React, { Component } from 'react';
+import { number } from 'prop-types';
+
+class Hits extends Component {
+  render() {
+    const { assertions, qntQuestions } = this.props;
+    return (
+      <div>
+        <span
+          data-testid="feedback-total-question"
+        >
+          {`Acertos: ${assertions}/${qntQuestions}`}
+        </span>
+      </div>
+    );
+  }
+}
+
+Hits.propTypes = {
+  assertions: number.isRequired,
+  qntQuestions: number.isRequired,
+};
+
+export default Hits;

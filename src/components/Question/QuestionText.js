@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { string } from 'prop-types';
+import htmlDecode from '../../functions/htmlDecode';
 
 class QuestionText extends Component {
   render() {
@@ -8,7 +9,7 @@ class QuestionText extends Component {
       <p
         data-testid="question-text"
       >
-        { question }
+        { htmlDecode(question) }
       </p>
     );
   }
