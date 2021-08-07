@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { arrayOf, objectOf } from 'prop-types';
 import { connect } from 'react-redux';
-import Header from '../components/Header/Header';
 import { Button, Feed, Hits, TotalScore } from '../components/Feedback';
+import { PlayerImg, PlayerName, Score } from '../components/Header';
 
 class Feedback extends Component {
   render() {
@@ -14,7 +14,9 @@ class Feedback extends Component {
       <div>
         <header>
           <h1>Feedback</h1>
-          <Header />
+          <PlayerImg />
+          <PlayerName />
+          <Score />
         </header>
         <main>
           <Feed
@@ -45,6 +47,7 @@ class Feedback extends Component {
 
 const mapStateToProps = ({ questions }) => ({
   getQuestions: questions.questions,
+  answered: questions.answered,
 });
 
 Feedback.propTypes = {
