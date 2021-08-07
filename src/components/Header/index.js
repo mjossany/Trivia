@@ -1,4 +1,3 @@
-export { default as Header } from './Header';
 export { default as PlayerImg } from './PlayerImg';
 export { default as PlayerName } from './PlayerName';
 export { default as Score } from './Score';

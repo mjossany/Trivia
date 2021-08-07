@@ -6,6 +6,7 @@ import fetchQuestions from '../fetchs/fetchQuestions';
 import QuestionCategory from '../components/Question/QuestionCategory';
 import QuestionText from '../components/Question/QuestionText';
 import QuestionAnswers from '../components/Question/QuestionAnswers';
+import { Button } from '../components/Feedback';
 
 class GameScreen extends Component {
   componentDidMount() {
@@ -29,6 +30,9 @@ class GameScreen extends Component {
           type={ getQuestions[getQuestionNumber].type }
           correctAnswer={ getQuestions[getQuestionNumber].correct_answer }
           wrongAnswers={ getQuestions[getQuestionNumber].incorrect_answers }
+        />
+        <Button
+          link="/feedback"
         />
       </div>
     );
