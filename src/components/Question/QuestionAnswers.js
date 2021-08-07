@@ -7,7 +7,13 @@ import { setAnsweredTrue } from '../../actions';
 
 class QuestionAnswers extends Component {
   render() {
-    const { correctAnswer, wrongAnswers, answered, answeredTrue } = this.props;
+    const {
+      startTimer,
+      correctAnswer,
+      wrongAnswers,
+      answered,
+      answeredTrue,
+    } = this.props;
     const allAnswers = [...wrongAnswers
       .map((answer, index) => ({
         correct: false, answer, index, isCorrect: 'wrong-answer',
@@ -35,7 +41,13 @@ class QuestionAnswers extends Component {
           })}
         </div>
         <div>
-          {answered && <NextQuestionBtn handleAnswered={ this.handleAnswered } />}
+          {
+            answered
+            && <NextQuestionBtn
+              startTimer={ startTimer }
+              handleAnswered={ this.handleAnswered }
+            />
+          }
         </div>
       </div>
     );
@@ -55,6 +67,7 @@ QuestionAnswers.propTypes = {
   wrongAnswers: arrayOf(string).isRequired,
   answered: bool.isRequired,
   answeredTrue: func.isRequired,
+  startTimer: func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(QuestionAnswers);

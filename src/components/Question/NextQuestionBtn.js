@@ -5,12 +5,12 @@ import { nextQuestion } from '../../actions';
 
 class NextQuestionBtn extends Component {
   render() {
-    const { changeQuestionNumber } = this.props;
+    const { changeQuestionNumber, startTimer } = this.props;
     return (
       <button
         type="button"
         data-testid="btn-next"
-        onClick={ changeQuestionNumber }
+        onClick={ () => { changeQuestionNumber(); startTimer(); } }
       >
         Próxima
       </button>
@@ -20,6 +20,7 @@ class NextQuestionBtn extends Component {
 
 NextQuestionBtn.propTypes = {
   changeQuestionNumber: func.isRequired,
+  startTimer: func.isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => ({

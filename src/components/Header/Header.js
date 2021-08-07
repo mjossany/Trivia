@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import md5 from 'crypto-js/md5';
 import { connect } from 'react-redux';
-import { string, bool } from 'prop-types';
+import { string, number } from 'prop-types';
 import PlayerName from './PlayerName';
 import Score from './Score';
 import PlayerImg from './PlayerImg';
@@ -9,12 +9,11 @@ import Timer from './Timer';
 
 class Header extends Component {
   render() {
-    const { Email, answered } = this.props;
+    const { Email, timer } = this.props;
     const img = md5(Email).toString();
-    if (answered) return <Timer />;
     return (
       <div>
-        <Timer />
+        <Timer timer={ timer } />
         <PlayerName />
         <PlayerImg
           playerImg={ img }
@@ -27,12 +26,11 @@ class Header extends Component {
 
 Header.propTypes = {
   Email: string.isRequired,
-  answered: bool.isRequired,
+  timer: number.isRequired,
 };
 
-const mapStateToProps = ({ player, questions }) => ({
+const mapStateToProps = ({ player }) => ({
   Email: player.gravatarEmail,
-  answered: questions.answered,
 });
 
 export default connect(mapStateToProps)(Header);
