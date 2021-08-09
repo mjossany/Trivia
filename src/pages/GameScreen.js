@@ -6,7 +6,9 @@ import fetchQuestions from '../fetchs/fetchQuestions';
 import QuestionCategory from '../components/Question/QuestionCategory';
 import QuestionText from '../components/Question/QuestionText';
 import QuestionAnswers from '../components/Question/QuestionAnswers';
-import { setAnsweredTrue } from '../actions';
+import { setAnsweredTrueIncorrect, setStoreScore } from '../actions';
+import calculateScore from '../functions/calculateScore';
+// import saveInfoLocalStorage from '../functions/saveInfoLocalStorage';
 
 class GameScreen extends Component {
   constructor() {
@@ -27,11 +29,29 @@ class GameScreen extends Component {
 
   componentDidUpdate() {
     const { state } = this;
-    const { answered, answeredTrue } = this.props;
-    if (answered === true) clearInterval(this.interval);
+    const { timer } = this.state;
+    const {
+      getQuestions,
+      getQuestionNumber,
+      isCorrect,
+      // name,
+      // email,
+      // getScore,
+      // getAssertions,
+    } = this.props;
+    const { answered, answeredTrueIncorrect, storeScore } = this.props;
+    if (answered === true) {
+      clearInterval(this.interval);
+      const score = calculateScore(
+        timer,
+        getQuestions[getQuestionNumber].difficulty,
+        isCorrect,
+      );
+      storeScore(score);
+    }
     if (state.timer === 0) {
       clearInterval(this.interval);
-      answeredTrue();
+      answeredTrueIncorrect();
     }
   }
 
@@ -80,14 +100,17 @@ class GameScreen extends Component {
 
 const mapDispathToProps = (dispatch) => ({
   dispatchQuestions: (questions) => (dispatch(fetchQuestions(questions))),
-  answeredTrue: () => dispatch(setAnsweredTrue()),
+  answeredTrueIncorrect: () => dispatch(setAnsweredTrueIncorrect()),
+  storeScore: (score) => dispatch(setStoreScore(score)),
 });
 
 const mapStateToProps = ({ questions }) => ({
   getQuestions: questions.questions,
+  getQuestionsDifficulty: questions.difficulty,
   getLoading: questions.loading,
   getQuestionNumber: questions.questionNumber,
   answered: questions.answered,
+  isCorrect: questions.correct,
 });
 
 GameScreen.propTypes = {
@@ -96,7 +119,9 @@ GameScreen.propTypes = {
   getLoading: bool.isRequired,
   getQuestionNumber: number.isRequired,
   answered: bool.isRequired,
-  answeredTrue: func.isRequired,
+  answeredTrueIncorrect: func.isRequired,
+  storeScore: func.isRequired,
+  isCorrect: bool.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispathToProps)(GameScreen);
