@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { string } from 'prop-types';
+import { string, func } from 'prop-types';
 
 class Button extends Component {
   render() {
-    const { link, testId, label } = this.props;
+    const { link, testId, label, onClick } = this.props;
     if (link !== '') {
       return (
         <div>
@@ -12,6 +12,7 @@ class Button extends Component {
             <button
               type="button"
               data-testid={ testId }
+              onClick={ onClick }
             >
               { label }
             </button>
@@ -24,6 +25,7 @@ class Button extends Component {
         <button
           type="button"
           data-testid={ testId }
+          onClick={ onClick }
         >
           { label }
         </button>
@@ -36,11 +38,13 @@ Button.propTypes = {
   link: string,
   testId: string,
   label: string.isRequired,
+  onClick: func,
 };
 
 Button.defaultProps = {
   link: '',
   testId: '',
+  onClick: null,
 };
 
 export default Button;

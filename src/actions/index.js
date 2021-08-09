@@ -8,6 +8,7 @@ export const NEXT_QUESTION = 'NEXT_QUESTION';
 export const SET_ANSWERED_TRUE_CORRECT = 'SET_ANSWERED_TRUE_CORRECT';
 export const SET_ANSWERED_TRUE_INCORRECT = 'SET_ANSWERED_TRUE_INCORRECT';
 export const SET_STORE_SCORE = 'SET_STORE_SCORE';
+export const SET_RESET = 'SET_RESET';
 
 export const getToken = (payload) => ({ type: GET_TOKEN, payload });
 
@@ -28,3 +29,5 @@ export const setAnsweredTrueCorrect = () => ({ type: SET_ANSWERED_TRUE_CORRECT }
 export const setAnsweredTrueIncorrect = () => ({ type: SET_ANSWERED_TRUE_INCORRECT });
 
 export const setStoreScore = (payload) => ({ type: SET_STORE_SCORE, payload });
+
+export const setReset = () => ({ type: SET_RESET });
