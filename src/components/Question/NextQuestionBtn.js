@@ -3,6 +3,7 @@ import { func, string, number } from 'prop-types';
 import { connect } from 'react-redux';
 import { nextQuestion } from '../../actions';
 import saveInfoLocalStorage from '../../functions/saveInfoLocalStorage';
+import Button from '../Feedback/Button';
 
 class NextQuestionBtn extends Component {
   componentDidMount() {
@@ -11,7 +12,17 @@ class NextQuestionBtn extends Component {
   }
 
   render() {
-    const { changeQuestionNumber, startTimer } = this.props;
+    const { changeQuestionNumber, startTimer, questionNumber } = this.props;
+    const maxQuestion = 4;
+    if (questionNumber === maxQuestion) {
+      return (
+        <Button
+          testId="btn-next"
+          label="Próxima"
+          link="/feedback"
+        />
+      );
+    }
     return (
       <button
         type="button"
@@ -31,6 +42,7 @@ NextQuestionBtn.propTypes = {
   email: string.isRequired,
   score: number.isRequired,
   assertions: number.isRequired,
+  questionNumber: number.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -38,6 +50,7 @@ const mapStateToProps = (state) => ({
   email: state.player.gravatarEmail,
   score: state.questions.score,
   assertions: state.questions.assertions,
+  questionNumber: state.questions.questionNumber,
 });
 
 const mapDispatchToProps = (dispatch) => ({
