@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { bool } from 'prop-types';
-import { PlayerImg, PlayerName, Score, Timer } from '.';
+import { number } from 'prop-types';
+import PlayerName from './PlayerName';
+import Score from './Score';
+import PlayerImg from './PlayerImg';
+import Timer from './Timer';
 
 class Header extends Component {
   render() {
-    const { answered } = this.props;
-    if (answered) return <Timer />;
+    const { timer } = this.props;
     return (
       <div>
-        <Timer />
+        <Timer timer={ timer } />
         <PlayerName />
         <PlayerImg />
         <Score />
@@ -19,11 +20,7 @@ class Header extends Component {
 }
 
 Header.propTypes = {
-  answered: bool.isRequired,
+  timer: number.isRequired,
 };
 
-const mapStateToProps = ({ questions }) => ({
-  answered: questions.answered,
-});
-
-export default connect(mapStateToProps)(Header);
+export default Header;

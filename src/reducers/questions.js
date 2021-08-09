@@ -2,7 +2,9 @@ import {
   STORAGE_QUESTIONS,
   STORAGE_QUESTIONS_ERROR,
   GET_QUESTIONS, NEXT_QUESTION,
-  SET_ANSWERED_TRUE,
+  SET_ANSWERED_TRUE_CORRECT,
+  SET_ANSWERED_TRUE_INCORRECT,
+  SET_STORE_SCORE,
 } from '../actions';
 
 const INITIAL_STATE = {
@@ -11,6 +13,9 @@ const INITIAL_STATE = {
   answered: false,
   loading: true,
   error: '',
+  correct: false,
+  assertions: 0,
+  score: 0,
 };
 
 function storageQuestionsReducer(state = INITIAL_STATE, action) {
@@ -23,8 +28,12 @@ function storageQuestionsReducer(state = INITIAL_STATE, action) {
     return { ...state, error: 'erro' };
   case NEXT_QUESTION:
     return { ...state, questionNumber: state.questionNumber + 1, answered: false };
-  case SET_ANSWERED_TRUE:
-    return { ...state, answered: true };
+  case SET_ANSWERED_TRUE_CORRECT:
+    return { ...state, answered: true, assertions: state.assertions + 1, correct: true };
+  case SET_ANSWERED_TRUE_INCORRECT:
+    return { ...state, answered: true, correct: false };
+  case SET_STORE_SCORE:
+    return { ...state, score: state.score + action.payload };
 
   default:
     return state;
