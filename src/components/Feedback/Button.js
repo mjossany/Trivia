@@ -44,7 +44,7 @@ Button.propTypes = {
 Button.defaultProps = {
   link: '',
   testId: '',
-  onClick: '',
+  onClick: null,
 };
 
 export default Button;
