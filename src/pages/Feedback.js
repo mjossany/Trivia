@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
-import { arrayOf, objectOf } from 'prop-types';
+import { arrayOf, objectOf, number } from 'prop-types';
 import { connect } from 'react-redux';
 import { Button, Feed, Hits, TotalScore } from '../components/Feedback';
 import { PlayerImg, PlayerName, Score } from '../components/Header';
 
 class Feedback extends Component {
   render() {
-    const { getQuestions } = this.props;
-    const assertions = 4; // Pegar valor do stado global ou na localStorage não tenho certeza;
-    const totalScore = 0; // Pegar valor do stado global ou na localStorage não tenho certeza;
+    const { getQuestions, getAssertions, getScore } = this.props;
+    const assertions = getAssertions; // Pegar valor do stado global ou na localStorage não tenho certeza;
+    const totalScore = getScore; // Pegar valor do stado global ou na localStorage não tenho certeza;
     const qntQuestions = getQuestions.length;
     return (
       <div>
@@ -48,10 +48,14 @@ class Feedback extends Component {
 const mapStateToProps = ({ questions }) => ({
   getQuestions: questions.questions,
   answered: questions.answered,
+  getScore: questions.score,
+  getAssertions: questions.assertions,
 });
 
 Feedback.propTypes = {
   getQuestions: arrayOf(objectOf).isRequired,
+  getScore: number.isRequired,
+  getAssertions: number.isRequired,
 };
 
 export default connect(mapStateToProps)(Feedback);

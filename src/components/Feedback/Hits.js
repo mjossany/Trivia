@@ -9,7 +9,10 @@ class Hits extends Component {
         <span
           data-testid="feedback-total-question"
         >
-          {`Acertos: ${assertions}/${qntQuestions}`}
+          {assertions}
+        </span>
+        <span>
+          {`/${qntQuestions}`}
         </span>
       </div>
     );

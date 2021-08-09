@@ -6,10 +6,13 @@ class TotalScore extends Component {
     const { totalScore } = this.props;
     return (
       <div>
+        <span>
+          Total Score:
+        </span>
         <span
           data-testid="feedback-total-score"
         >
-          {`Total Score: ${totalScore}`}
+          {totalScore}
         </span>
       </div>
     );
