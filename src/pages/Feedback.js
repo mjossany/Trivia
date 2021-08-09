@@ -7,8 +7,8 @@ import { PlayerImg, PlayerName, Score } from '../components/Header';
 class Feedback extends Component {
   render() {
     const { getQuestions, getAssertions, getScore } = this.props;
-    const assertions = getAssertions; // Pegar valor do stado global ou na localStorage não tenho certeza;
-    const totalScore = getScore; // Pegar valor do stado global ou na localStorage não tenho certeza;
+    const assertions = getAssertions;
+    const totalScore = getScore;
     const qntQuestions = getQuestions.length;
     return (
       <div>
