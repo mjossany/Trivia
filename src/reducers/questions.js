@@ -1,10 +1,11 @@
 import {
   STORAGE_QUESTIONS,
-  STORAGE_QUESTIONS_ERROR,
+  // STORAGE_QUESTIONS_ERROR,
   GET_QUESTIONS, NEXT_QUESTION,
   SET_ANSWERED_TRUE_CORRECT,
   SET_ANSWERED_TRUE_INCORRECT,
   SET_STORE_SCORE,
+  SET_RESET,
 } from '../actions';
 
 const INITIAL_STATE = {
@@ -24,8 +25,10 @@ function storageQuestionsReducer(state = INITIAL_STATE, action) {
     return { ...state, loading: true };
   case STORAGE_QUESTIONS:
     return { ...state, loading: false, questions: action.payload };
-  case STORAGE_QUESTIONS_ERROR:
-    return { ...state, error: 'erro' };
+  // case STORAGE_QUESTIONS_ERROR:
+  //   return { ...state, error: 'erro' };
+  case SET_RESET:
+    return { ...INITIAL_STATE };
   case NEXT_QUESTION:
     return { ...state, questionNumber: state.questionNumber + 1, answered: false };
   case SET_ANSWERED_TRUE_CORRECT:
