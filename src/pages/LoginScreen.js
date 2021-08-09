@@ -9,6 +9,7 @@ import '../App.css';
 import ButtonSettings from '../components/LoginScreen/ButtonSettings';
 import { storagePlayerInfo } from '../actions/index';
 import fetchToken from '../fetchs/fetchToken';
+import saveInfoLocalStorage from '../functions/saveInfoLocalStorage';
 
 class LoginScreen extends Component {
   constructor(props) {
@@ -30,10 +31,12 @@ class LoginScreen extends Component {
 
   async getToken() {
     const { state } = this;
+    const { name, email } = state;
     const { storePlayerInfo, token } = this.props;
     const tokenStringfy = JSON.stringify(token);
     localStorage.setItem('token', tokenStringfy);
     storePlayerInfo(state);
+    saveInfoLocalStorage(name, email);
   }
 
   handleChange({ target }) {
@@ -88,8 +91,8 @@ LoginScreen.propTypes = {
   token: string.isRequired,
 };
 
-const mapStateToProps = ({ token }) => ({
-  token: token.token,
+const mapStateToProps = (state) => ({
+  token: state.token.token,
 });
 
 const mapDispatchToProps = (dispatch) => ({

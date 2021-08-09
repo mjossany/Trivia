@@ -5,7 +5,9 @@ export const GET_QUESTIONS = 'GET_QUESTIONS';
 export const GET_TOKEN = 'GET_TOKEN';
 export const GET_TOKEN_ERROR = 'GET_TOKEN_ERROR';
 export const NEXT_QUESTION = 'NEXT_QUESTION';
-export const SET_ANSWERED_TRUE = 'SET_ANSWERED_TRUE';
+export const SET_ANSWERED_TRUE_CORRECT = 'SET_ANSWERED_TRUE_CORRECT';
+export const SET_ANSWERED_TRUE_INCORRECT = 'SET_ANSWERED_TRUE_INCORRECT';
+export const SET_STORE_SCORE = 'SET_STORE_SCORE';
 
 export const getToken = (payload) => ({ type: GET_TOKEN, payload });
 
@@ -21,4 +23,8 @@ export const storageQuestionsError = ({ type: STORAGE_QUESTIONS_ERROR });
 
 export const nextQuestion = () => ({ type: NEXT_QUESTION });
 
-export const setAnsweredTrue = () => ({ type: SET_ANSWERED_TRUE });
+export const setAnsweredTrueCorrect = () => ({ type: SET_ANSWERED_TRUE_CORRECT });
+
+export const setAnsweredTrueIncorrect = () => ({ type: SET_ANSWERED_TRUE_INCORRECT });
+
+export const setStoreScore = (payload) => ({ type: SET_STORE_SCORE, payload });

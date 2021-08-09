@@ -3,7 +3,8 @@ import { string, arrayOf, bool, func } from 'prop-types';
 import { connect } from 'react-redux';
 import randomize from '../../functions/randomize';
 import NextQuestionBtn from './NextQuestionBtn';
-import { setAnsweredTrue } from '../../actions';
+// import correctFalseAnswer from '../../functions/correctFalseAnswer';
+import { setAnsweredTrueCorrect, setAnsweredTrueIncorrect } from '../../actions';
 
 class QuestionAnswers extends Component {
   render() {
@@ -12,7 +13,8 @@ class QuestionAnswers extends Component {
       correctAnswer,
       wrongAnswers,
       answered,
-      answeredTrue,
+      answeredTrueCorrect,
+      answeredTrueIncorrect,
     } = this.props;
     const allAnswers = [...wrongAnswers
       .map((answer, index) => ({
@@ -32,7 +34,7 @@ class QuestionAnswers extends Component {
                 key={ answer }
                 data-testid={ correct ? 'correct-answer' : `wrong-answer-${i}` }
                 disabled={ answered }
-                onClick={ answeredTrue }
+                onClick={ correct ? answeredTrueCorrect : answeredTrueIncorrect }
                 className={ answered ? isCorrect : '' }
               >
                 {answer}
@@ -55,7 +57,8 @@ class QuestionAnswers extends Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  answeredTrue: () => dispatch(setAnsweredTrue()),
+  answeredTrueCorrect: () => dispatch(setAnsweredTrueCorrect()),
+  answeredTrueIncorrect: () => dispatch(setAnsweredTrueIncorrect()),
 });
 
 const mapStateToProps = ({ questions }) => ({
@@ -66,8 +69,9 @@ QuestionAnswers.propTypes = {
   correctAnswer: string.isRequired,
   wrongAnswers: arrayOf(string).isRequired,
   answered: bool.isRequired,
-  answeredTrue: func.isRequired,
   startTimer: func.isRequired,
+  answeredTrueCorrect: func.isRequired,
+  answeredTrueIncorrect: func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(QuestionAnswers);
