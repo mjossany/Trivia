@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { nextQuestion } from '../../actions';
 import saveInfoLocalStorage from '../../functions/saveInfoLocalStorage';
 import Button from '../Feedback/Button';
+import saveRankLocalStorage from '../../functions/saveRankLocalStorage';
 
 class NextQuestionBtn extends Component {
   componentDidMount() {
@@ -13,8 +14,10 @@ class NextQuestionBtn extends Component {
 
   render() {
     const { changeQuestionNumber, startTimer, questionNumber } = this.props;
+    const { name, email, score } = this.props;
     const maxQuestion = 4;
     if (questionNumber === maxQuestion) {
+      saveRankLocalStorage(name, email, score);
       return (
         <Button
           testId="btn-next"
