@@ -4,25 +4,17 @@ import { connect } from 'react-redux';
 import { Button, Feed, Hits, TotalScore } from '../components/Feedback';
 import { PlayerImg, PlayerName, Score } from '../components/Header';
 import { setReset } from '../actions';
-// import saveRankLocalStorage from '../functions/saveRankLocalStorage';
 
 class Feedback extends Component {
   constructor(props) {
     super(props);
     this.goHome = this.goHome.bind(this);
-    this.goRanking = this.goRanking.bind(this);
   }
 
   goHome() {
     const { reset, history } = this.props;
     reset();
     history.push('/');
-  }
-
-  goRanking() {
-    const { history } = this.props;
-    // saveRankLocalStorage();
-    history.push('/ranking');
   }
 
   render() {
@@ -55,7 +47,7 @@ class Feedback extends Component {
             label="Jogar novamente"
           />
           <Button
-            onClick={ this.goRanking }
+            link="/ranking"
             testId="btn-ranking"
             label="Ver Ranking"
           />
